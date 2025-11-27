@@ -25,37 +25,48 @@ export default function ChartsPage() {
   if (!analytics)
     return (
       <div className="flex items-center justify-center h-64">
-        <p className="text-lg text-gray-500">Loading analytics...</p>
+        <p className="text-lg text-gray-500 animate-pulse">
+          Loading analytics...
+        </p>
       </div>
     );
 
-  // --- Format data for charts ---
+  // --- Format chart data ---
   const priceDistData = Object.entries(analytics.price_distribution).map(
     ([label, value]) => ({ label, value })
   );
-
   const bhkAvgData = Object.entries(analytics.bhk_avg_price).map(
     ([bhk, price]) => ({ bhk, price })
   );
-
   const localityData = Object.entries(analytics.locality_avg_price).map(
     ([loc, price]) => ({ loc, price })
   );
-
   const scatterData = analytics.scatter_data;
 
   return (
-    <div className="p-8 space-y-16">
-      <h1 className="text-4xl font-semibold text-gray-800 mb-8">
-        Market Analytics & Insights
-      </h1>
+    <div className="px-8 py-10 space-y-16 max-w-7xl mx-auto">
 
-      {/* --------------------------- PRICE DISTRIBUTION --------------------------- */}
-      <section>
-        <h2 className="text-2xl font-semibold mb-4">Price Distribution</h2>
-        <ResponsiveContainer width="100%" height={300}>
+      {/* Title */}
+      <h1 className="text-5xl font-bold text-gray-900 tracking-tight mb-4">
+        Market Analytics
+      </h1>
+      <p className="text-lg text-gray-600 mb-10">
+        Explore pricing trends, locality insights, and predictive analytics of the Delhi housing market.
+      </p>
+
+      {/* ========================= PRICE DISTRIBUTION ========================= */}
+      <section className="p-8 rounded-2xl bg-white/60 backdrop-blur-xl shadow-xl border border-gray-200">
+        <h2 className="text-3xl font-semibold mb-6 text-indigo-700">
+          Price Distribution
+        </h2>
+        <p className="text-gray-600 mb-6">
+          Number of houses available within different price brackets.
+        </p>
+
+        <ResponsiveContainer width="100%" height={350}>
           <BarChart data={priceDistData}>
-            <XAxis dataKey="label" angle={-30} textAnchor="end" height={80} />
+            <CartesianGrid strokeDasharray="3 3" opacity={0.3} />
+            <XAxis dataKey="label" angle={-25} textAnchor="end" height={70} />
             <YAxis />
             <Tooltip />
             <Bar dataKey="value" fill="#6366F1" />
@@ -63,12 +74,18 @@ export default function ChartsPage() {
         </ResponsiveContainer>
       </section>
 
-      {/* --------------------------- BHK AVERAGE PRICE --------------------------- */}
-      <section>
-        <h2 className="text-2xl font-semibold mb-4">Average Price by BHK</h2>
-        <ResponsiveContainer width="100%" height={300}>
+      {/* ========================= BHK AVG PRICE ========================= */}
+      <section className="p-8 rounded-2xl bg-white/60 backdrop-blur-xl shadow-xl border border-gray-200">
+        <h2 className="text-3xl font-semibold mb-6 text-emerald-700">
+          Average Price by BHK
+        </h2>
+        <p className="text-gray-600 mb-6">
+          How house prices change with number of bedrooms (BHK).
+        </p>
+
+        <ResponsiveContainer width="100%" height={350}>
           <LineChart data={bhkAvgData}>
-            <CartesianGrid strokeDasharray="3 3" />
+            <CartesianGrid strokeDasharray="3 3" opacity={0.3} />
             <XAxis dataKey="bhk" />
             <YAxis />
             <Tooltip />
@@ -82,15 +99,19 @@ export default function ChartsPage() {
         </ResponsiveContainer>
       </section>
 
-      {/* --------------------------- LOCALITY TOP 10 --------------------------- */}
-      <section>
-        <h2 className="text-2xl font-semibold mb-4">
+      {/* ========================= LOCALITY TOP 10 ========================= */}
+      <section className="p-8 rounded-2xl bg-white/60 backdrop-blur-xl shadow-xl border border-gray-200">
+        <h2 className="text-3xl font-semibold mb-6 text-amber-700">
           Top 10 Most Expensive Localities
         </h2>
-        <ResponsiveContainer width="100%" height={350}>
+        <p className="text-gray-600 mb-6">
+          A look at the premium areas with the highest average price per house.
+        </p>
+
+        <ResponsiveContainer width="100%" height={400}>
           <BarChart data={localityData}>
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="loc" angle={-25} textAnchor="end" height={100} />
+            <CartesianGrid strokeDasharray="3 3" opacity={0.3} />
+            <XAxis dataKey="loc" angle={-25} textAnchor="end" height={90} />
             <YAxis />
             <Tooltip />
             <Bar dataKey="price" fill="#F59E0B" />
@@ -98,14 +119,18 @@ export default function ChartsPage() {
         </ResponsiveContainer>
       </section>
 
-      {/* --------------------------- SCATTER: SIZE VS PRICE --------------------------- */}
-      <section>
-        <h2 className="text-2xl font-semibold mb-4">
+      {/* ========================= SCATTER CHART ========================= */}
+      <section className="p-8 rounded-2xl bg-white/60 backdrop-blur-xl shadow-xl border border-gray-200">
+        <h2 className="text-3xl font-semibold mb-6 text-rose-700">
           Size (SqFt) vs Price (Lakhs)
         </h2>
-        <ResponsiveContainer width="100%" height={350}>
+        <p className="text-gray-600 mb-6">
+          Relationship between the built-up area and price of properties.
+        </p>
+
+        <ResponsiveContainer width="100%" height={400}>
           <ScatterChart>
-            <CartesianGrid />
+            <CartesianGrid opacity={0.3} />
             <XAxis
               dataKey="Size_in_SqFt"
               name="Size"
@@ -114,7 +139,11 @@ export default function ChartsPage() {
             <YAxis
               dataKey="Price_in_Lakhs"
               name="Price"
-              label={{ value: "Price in Lakhs", angle: -90, position: "insideLeft" }}
+              label={{
+                value: "Price in Lakhs",
+                angle: -90,
+                position: "insideLeft",
+              }}
             />
             <Tooltip cursor={{ strokeDasharray: "3 3" }} />
             <Scatter data={scatterData} fill="#EF4444" />

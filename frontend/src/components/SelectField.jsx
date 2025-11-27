@@ -1,16 +1,17 @@
-export default function SelectField({ label, value, options, onChange }) {
+export default function SelectField({ label, options, value, onChange }) {
   return (
-    <div>
-      <label className="block mb-1 text-gray-700">{label}</label>
+    <div className="flex flex-col gap-2">
+      <label className="text-gray-700 font-semibold">{label}</label>
       <select
-        className="border p-2 rounded w-full"
         value={value}
         onChange={onChange}
+        className="select-field"
       >
-        <option value="">Select {label}</option>
-
-        {options?.map((opt, idx) => (
-          <option key={idx} value={opt}>{opt}</option>
+        <option value="">Select...</option>
+        {options?.map((opt) => (
+          <option key={opt} value={opt}>
+            {opt}
+          </option>
         ))}
       </select>
     </div>
