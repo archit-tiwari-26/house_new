@@ -1,0 +1,60 @@
+{
+  "best_model": "HistGradientBoosting",
+  "features": [
+    "Locality",
+    "Property_Type",
+    "Furnished_Status",
+    "Parking_Space",
+    "Facing",
+    "Owner_Type",
+    "Availability_Status",
+    "BHK",
+    "Size_in_SqFt",
+    "Floor_No",
+    "Total_Floors",
+    "Age_of_Property",
+    "Nearby_Schools",
+    "Nearby_Hospitals",
+    "Public_Transport_Accessibility",
+    "Security",
+    "Amenities_count",
+    "has_pool",
+    "has_gym",
+    "has_garden",
+    "has_clubhouse",
+    "has_playground"
+  ],
+  "categorical": [
+    "Locality",
+    "Property_Type",
+    "Furnished_Status",
+    "Parking_Space",
+    "Facing",
+    "Owner_Type",
+    "Availability_Status"
+  ],
+  "numeric": [
+    "BHK",
+    "Size_in_SqFt",
+    "Floor_No",
+    "Total_Floors",
+    "Age_of_Property",
+    "Nearby_Schools",
+    "Nearby_Hospitals",
+    "Public_Transport_Accessibility",
+    "Security",
+    "Amenities_count",
+    "has_pool",
+    "has_gym",
+    "has_garden",
+    "has_clubhouse",
+    "has_playground"
+  ],
+  "amenity_flags": [
+    "pool",
+    "gym",
+    "garden",
+    "clubhouse",
+    "playground"
+  ]
+}
